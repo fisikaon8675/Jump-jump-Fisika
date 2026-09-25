@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Physics Ascender</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="clouds-bg"></div>
+    
+    <!-- UI Layer -->
+    <div id="game-ui">
+        <div id="top-bar">
+            <h1>Physics Ascender</h1>
+            <div class="cartoon-text">JUMP! <span class="arrow">⬆️</span></div>
+        </div>
+        
+        <div id="hud-right">
+            <div class="hud-box">
+                <div>Ketinggian: <span id="alt-val">0</span> m</div>
+                <div>Gems: <span id="gem-val">0</span> 💎</div>
+                <div class="energy-label">Energi (WASD/Arrows):</div>
+                <div class="energy-bar-container">
+                    <div id="energy-bar-fill"></div>
+                </div>
+                <div style="font-size: 12px; margin-top: 8px; font-weight: normal;">Tekan 'Q' atau sentuh Gems untuk Kuis</div>
+            </div>
+            <button id="pause-btn" onclick="togglePause()" style="margin-top: 10px; padding: 10px; font-weight: bold; background: #ea4335; color: white; border: none; border-radius: 8px; cursor: pointer; width: 100%; pointer-events: auto;">PAUSE (P)</button>
+        </div>
+
+        <!-- Quiz Modal -->
+        <div id="quiz-modal">
+            <div class="modal-content">
+                <div class="modal-title" id="q-title">Loading question...</div>
+                <div class="modal-hint" id="q-hint">💡 Hint</div>
+                <div class="options-grid" id="q-opts"></div>
+            </div>
+        </div>
+
+        <!-- Start/Mission Overlay -->
+        <div id="start-overlay" style="display: flex; position: absolute; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.8); z-index: 1000; flex-direction: column; justify-content: center; align-items: center; pointer-events: auto;">
+            <div class="modal-content" style="text-align: center;">
+                <h1 style="color: #673ab7; margin-bottom: 10px;">MISI ANDA</h1>
+                <p style="font-size: 18px; line-height: 1.5; font-weight: bold; color: #333;">
+                    Kamu adalah "Si Ungu", makhluk elastis penjelajah langit.<br><br>
+                    Tujuanmu adalah mencapai garis Finish di puncak (Ketinggian 28.600m). Kumpulkan <b style="color: #4caf50;">Gems 💎</b> yang tersebar untuk mengaktifkan kuis fisika. Jawab dengan benar untuk memulihkan energi lompatanmu!<br><br>
+                    Gunakan W,A,S,D atau Tombol Panah untuk bergerak.
+                </p>
+                <button onclick="startGame()" style="margin-top: 20px; padding: 15px 30px; font-size: 20px; font-weight: bold; background: #4caf50; color: white; border: none; border-radius: 8px; cursor: pointer;">MULAI PETUALANGAN</button>
+            </div>
+        </div>
+
+        <!-- Pause Overlay -->
+        <div id="pause-overlay" style="display: none; position: absolute; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.7); z-index: 999; flex-direction: column; justify-content: center; align-items: center; pointer-events: auto;">
+            <h1 style="color: white; font-size: 50px; text-shadow: 2px 2px 4px #000;">GAME PAUSED</h1>
+            <button onclick="togglePause()" style="margin-top: 20px; padding: 15px 30px; font-size: 20px; font-weight: bold; background: #fbbc05; color: #333; border: none; border-radius: 8px; cursor: pointer;">LANJUTKAN</button>
+        </div>
+
+        <!-- End Overlay -->
+        <div id="overlay-msg">
+            <div class="overlay-title" id="end-title">KAMU MENANG!</div>
+            <div id="end-sub" style="font-size: 20px; color: #333; margin-bottom: 30px; font-weight: bold;"></div>
+            <button class="restart-btn" onclick="location.reload()">MAIN LAGI</button>
+        </div>
+    </div>
+
+    <!-- Physics Canvas -->
+    <div id="canvas-container"></div>
+
+    <!-- Matter.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>

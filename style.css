@@ -1,0 +1,125 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@700&display=swap');
+
+* { box-sizing: border-box; }
+
+body, html {
+    margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden;
+    font-family: 'Nunito', sans-serif;
+    background-color: #a0d8ef; /* Light sky blue */
+    /* Motif garis horizontal tipis halus */
+    background-image: repeating-linear-gradient(
+        to bottom,
+        transparent,
+        transparent 39px,
+        rgba(255, 255, 255, 0.4) 40px
+    );
+}
+
+/* Background Awan CSS */
+.clouds-bg {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none; z-index: -1;
+    background-image: 
+        radial-gradient(circle at 15% 20%, #fff 40px, transparent 41px),
+        radial-gradient(circle at 18% 18%, #fff 30px, transparent 31px),
+        radial-gradient(circle at 12% 21%, #fff 25px, transparent 26px),
+        radial-gradient(circle at 80% 60%, #fff 50px, transparent 51px),
+        radial-gradient(circle at 76% 57%, #fff 40px, transparent 41px),
+        radial-gradient(circle at 85% 62%, #fff 30px, transparent 31px),
+        radial-gradient(circle at 50% 80%, #fff 60px, transparent 61px),
+        radial-gradient(circle at 45% 76%, #fff 40px, transparent 41px),
+        radial-gradient(circle at 55% 82%, #fff 45px, transparent 46px);
+    opacity: 0.8;
+}
+
+#canvas-container {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;
+}
+
+#game-ui {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none; z-index: 10;
+}
+
+/* Header Bar Tebal Ungu Gelap */
+#top-bar {
+    width: 100%; background-color: #3b1c4a; 
+    color: white; padding: 12px 25px;
+    display: flex; justify-content: space-between; align-items: center;
+    border-bottom: 5px solid #1a0b22;
+}
+
+#top-bar h1 { margin: 0; font-family: 'Fredoka One', cursive; font-size: 32px; letter-spacing: 1px; }
+
+/* Teks Petunjuk Kartun */
+.cartoon-text {
+    font-family: 'Fredoka One', cursive; font-size: 26px; color: #ffeb3b;
+    text-shadow: 2px 2px 0px #000;
+}
+.cartoon-text .arrow { color: #4caf50; }
+
+/* HUD Kanan Atas */
+#hud-right {
+    position: absolute; top: 90px; right: 20px;
+}
+
+.hud-box {
+    background: white; border: 4px solid #3b1c4a; border-radius: 20px;
+    padding: 15px 25px;
+    box-shadow: 0 6px 0px #3b1c4a;
+    font-size: 18px; font-weight: bold; color: #3b1c4a;
+    min-width: 240px; pointer-events: auto;
+}
+
+.energy-label { margin-top: 10px; margin-bottom: 5px; }
+
+.energy-bar-container {
+    width: 100%; height: 24px; background: #ddd; border-radius: 12px;
+    border: 3px solid #1a0b22; overflow: hidden;
+}
+
+#energy-bar-fill {
+    width: 100%; height: 100%; background: #4caf50;
+    transition: width 0.2s, background-color 0.2s;
+}
+
+/* Modal Kuis Ala Material */
+#quiz-modal {
+    display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.5); backdrop-filter: blur(4px);
+    justify-content: center; align-items: center; pointer-events: auto; z-index: 100;
+}
+
+.modal-content {
+    background: #fff; width: 90%; max-width: 550px;
+    border-radius: 24px; padding: 35px; box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+    text-align: center;
+}
+
+.modal-title { font-size: 22px; font-weight: bold; margin-bottom: 15px; color: #202124; line-height: 1.4; }
+.modal-hint { background: #e8f0fe; color: #1967d2; padding: 12px; border-radius: 12px; margin-bottom: 25px; font-size: 16px; font-weight: bold; }
+
+.options-grid { display: flex; flex-direction: column; gap: 12px; }
+
+.opt-btn {
+    background: white; border: 2px solid #dadce0; border-radius: 12px; padding: 16px;
+    font-size: 16px; font-weight: bold; color: #3c4043; cursor: pointer; transition: 0.2s;
+    text-align: left;
+}
+.opt-btn:hover { background: #f8faff; border-color: #4285F4; }
+.opt-btn.correct { background: #e6f4ea; border-color: #34a853; color: #137333; }
+.opt-btn.wrong { background: #fce8e6; border-color: #ea4335; color: #c5221f; }
+
+/* Overlay Finish */
+#overlay-msg {
+    display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(255,255,255,0.9); justify-content: center; align-items: center;
+    flex-direction: column; pointer-events: auto; z-index: 100; text-align: center;
+}
+.overlay-title { font-family: 'Fredoka One', cursive; font-size: 50px; color: #3b1c4a; margin-bottom: 20px; }
+.restart-btn {
+    background: #ffeb3b; border: 4px solid #3b1c4a; border-radius: 20px; padding: 15px 40px;
+    font-size: 24px; font-family: 'Fredoka One', cursive; cursor: pointer; color: #3b1c4a;
+    box-shadow: 0 6px 0 #3b1c4a; transition: transform 0.1s, box-shadow 0.1s;
+}
+.restart-btn:active { transform: translateY(6px); box-shadow: 0 0 0 #3b1c4a; }
