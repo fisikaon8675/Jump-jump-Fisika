@@ -50,6 +50,7 @@ let isMusicPlaying = false;
 const fallSound = new Audio('assets/sound/fall.mp3');
 let isFallingSoundPlayed = false;
 let fallStartY = 0;
+let isSoundMuted = false;
 
 const gemTypes = ['gemBlue.png', 'gemGreen.png', 'gemRed.png'];
 
@@ -285,6 +286,8 @@ window.addEventListener('keydown', (e) => {
         triggerQuiz();
     } else if (key === 'p') {
         togglePause();
+    } else if (key === 'm') {
+        toggleSound();
     } else if (keys.hasOwnProperty(key)) {
         keys[key] = true;
     }
@@ -577,5 +580,22 @@ window.togglePause = function() {
         gameState = 'playing';
         engine.timing.timeScale = 1;
         document.getElementById('pause-overlay').style.display = 'none';
+    }
+};
+
+window.toggleSound = function() {
+    isSoundMuted = !isSoundMuted;
+    bgMusic.muted = isSoundMuted;
+    fallSound.muted = isSoundMuted;
+    
+    const soundBtn = document.getElementById('sound-btn');
+    if (soundBtn) {
+        if (isSoundMuted) {
+            soundBtn.textContent = 'SOUND: OFF 🔇 (M)';
+            soundBtn.style.background = '#9e9e9e';
+        } else {
+            soundBtn.textContent = 'SOUND: ON 🔊 (M)';
+            soundBtn.style.background = '#2196F3';
+        }
     }
 };
