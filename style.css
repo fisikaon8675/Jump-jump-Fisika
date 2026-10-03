@@ -123,3 +123,31 @@ body, html {
     box-shadow: 0 6px 0 #3b1c4a; transition: transform 0.1s, box-shadow 0.1s;
 }
 .restart-btn:active { transform: translateY(6px); box-shadow: 0 0 0 #3b1c4a; }
+
+/* Mobile Controls */
+.control-btn {
+    background: rgba(255, 255, 255, 0.4);
+    border: 4px solid #3b1c4a;
+    font-size: 32px;
+    color: #3b1c4a;
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 5px 0 #3b1c4a;
+    transition: transform 0.1s, box-shadow 0.1s, background 0.1s;
+    touch-action: manipulation; /* Cegah double-tap zoom */
+}
+.control-btn:active, .control-btn.active {
+    transform: translateY(5px);
+    box-shadow: 0 0 0 #3b1c4a;
+    background: rgba(255, 255, 255, 0.8);
+}
+
+@media (min-width: 1024px) {
+    #mobile-controls {
+        display: none !important; /* Sembunyikan di layar desktop/laptop */
+    }
+}
