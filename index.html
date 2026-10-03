@@ -64,6 +64,17 @@
             <div id="end-sub" style="font-size: 20px; color: #333; margin-bottom: 30px; font-weight: bold;"></div>
             <button class="restart-btn" onclick="location.reload()">MAIN LAGI</button>
         </div>
+
+        <!-- Mobile Controls -->
+        <div id="mobile-controls" style="display: flex; position: absolute; bottom: 30px; left: 0; width: 100%; justify-content: space-between; padding: 0 30px; z-index: 50; pointer-events: none;">
+            <div style="display: flex; gap: 20px; pointer-events: auto;">
+                <button id="btn-left" class="control-btn" style="width: 70px; height: 70px; border-radius: 50%; padding:0; margin:0; line-height: 1;">◀</button>
+                <button id="btn-right" class="control-btn" style="width: 70px; height: 70px; border-radius: 50%; padding:0; margin:0; line-height: 1;">▶</button>
+            </div>
+            <div style="pointer-events: auto;">
+                <button id="btn-jump" class="control-btn" style="width: 70px; height: 70px; border-radius: 50%; padding:0; margin:0; line-height: 1;">⬆️</button>
+            </div>
+        </div>
     </div>
 
     <!-- Physics Canvas -->
