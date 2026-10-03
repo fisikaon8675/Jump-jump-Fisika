@@ -566,11 +566,53 @@ Runner.run(runner, engine);
 window.addEventListener('resize', () => {
     SCREEN_WIDTH = window.innerWidth;
     SCREEN_HEIGHT = window.innerHeight;
-    render.canvas.width = SCREEN_WIDTH;
-    render.canvas.height = SCREEN_HEIGHT;
+    
+    const pixelRatio = window.devicePixelRatio || 1;
+    
+    // Perbaikan ukuran canvas saat fullscreen (menjaga pixel ratio dan set CSS style secara eksplisit)
+    render.canvas.width = SCREEN_WIDTH * pixelRatio;
+    render.canvas.height = SCREEN_HEIGHT * pixelRatio;
+    render.canvas.style.width = SCREEN_WIDTH + 'px';
+    render.canvas.style.height = SCREEN_HEIGHT + 'px';
+    
     render.options.width = SCREEN_WIDTH;
     render.options.height = SCREEN_HEIGHT;
 });
+
+// Kontrol Touch Mobile
+const btnLeft = document.getElementById('btn-left');
+const btnRight = document.getElementById('btn-right');
+const btnJump = document.getElementById('btn-jump');
+
+if (btnLeft && btnRight && btnJump) {
+    const handleTouch = (btn, keyName, isDown) => {
+        return (e) => {
+            if(e.cancelable) e.preventDefault(); // Mencegah perilaku default seperti scroll
+            keys[keyName] = isDown;
+            if (isDown) btn.classList.add('active');
+            else btn.classList.remove('active');
+            
+            // Auto play music on first touch if not playing
+            if (isDown && !isMusicPlaying) {
+                bgMusic.play().catch(err => console.log(err));
+                isMusicPlaying = true;
+            }
+        };
+    };
+
+    // Events (Touch & Mouse)
+    ['touchstart', 'mousedown'].forEach(evt => {
+        btnLeft.addEventListener(evt, handleTouch(btnLeft, 'a', true), {passive: false});
+        btnRight.addEventListener(evt, handleTouch(btnRight, 'd', true), {passive: false});
+        btnJump.addEventListener(evt, handleTouch(btnJump, 'w', true), {passive: false});
+    });
+
+    ['touchend', 'mouseup', 'mouseleave'].forEach(evt => {
+        btnLeft.addEventListener(evt, handleTouch(btnLeft, 'a', false), {passive: false});
+        btnRight.addEventListener(evt, handleTouch(btnRight, 'd', false), {passive: false});
+        btnJump.addEventListener(evt, handleTouch(btnJump, 'w', false), {passive: false});
+    });
+}
 
 // Kontrol State Game
 window.startGame = function() {
